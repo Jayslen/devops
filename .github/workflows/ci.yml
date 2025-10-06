@@ -1,0 +1,24 @@
+name: CI Hola Mundo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Hello World (Node.js)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: node index.js
+
+      - name: Send notification to ntfy.sh
+        run: |
+          curl -d "Se ejecutó el workflow de Hola Mundo ✅" https://ntfy.sh/devops-itla
